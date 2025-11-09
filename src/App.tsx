@@ -10,19 +10,17 @@ import { AlertsPage } from './features/alerts/AlertsPage';
 import { Tabs } from './components/Tabs';
 import { AlertContainer } from './components/AlertContainer';
 import { AlertType } from './types';
-import { useInventory } from './hooks/useInventory';
-import { useApp } from './contexts/AppContext';
 
 type TabId = 'products' | 'add' | 'import' | 'export' | 'movements' | 'alerts';
 
-const TABS = [
+const TABS: Array<{ id: TabId; label: string; icon: string }> = [
   { id: 'products', label: 'Produtos', icon: '📋' },
   { id: 'add', label: 'Adicionar Produto', icon: '➕' },
   { id: 'import', label: 'Importar CSV', icon: '📤' },
   { id: 'export', label: 'Exportar', icon: '📥' },
   { id: 'movements', label: 'Histórico', icon: '📊' },
   { id: 'alerts', label: 'Alertas', icon: '⚠️' },
-] as const;
+];
 
 interface AlertData {
   id: number;
@@ -33,8 +31,6 @@ interface AlertData {
 function AppContent() {
   const [activeTab, setActiveTab] = useState<TabId>('products');
   const [alerts, setAlerts] = useState<AlertData[]>([]);
-  const { products } = useInventory();
-  const { startEditingProduct } = useApp();
 
   const showAlert = useCallback((message: string, type: AlertType) => {
     const id = Date.now();
@@ -45,10 +41,9 @@ function AppContent() {
     setAlerts((prev) => prev.filter((alert) => alert.id !== id));
   }, []);
 
-  const handleEditProduct = (id: number) => {
-    startEditingProduct(id);
-    setActiveTab('products');
-  };
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as TabId);
+  }, []);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -81,7 +76,7 @@ function AppContent() {
       <div className="container mx-auto px-4 pb-8">
         <Dashboard />
 
-        <Tabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab}>
+        <Tabs tabs={TABS} activeTab={activeTab} onTabChange={handleTabChange}>
           {renderTabContent()}
         </Tabs>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useInventory } from '../../hooks/useInventory';
-import { Product, SortColumn, SortDirection, StockFilter } from '../../types';
+import { SortColumn, SortDirection, StockFilter } from '../../types';
 import { formatCurrency } from '../../lib/utils';
 import { StockBadge } from '../../components/StockBadge';
 import { EmptyState } from '../../components/EmptyState';

@@ -16,25 +16,32 @@ export class ApiError extends Error {
 // Substituir por implementação real com Axios/Fetch
 
 export const apiClient = {
-  get: async <T>(url: string): Promise<T> => {
+  get: async <T>(_url: string, _params?: unknown): Promise<T> => {
+    void _url;
+    void _params;
     throw new ApiError(
       'Backend não configurado. Configure VITE_API_URL e implemente o cliente HTTP.',
       503
     );
   },
-  post: async <T>(url: string, data?: unknown): Promise<T> => {
+  post: async <T>(_url: string, _data?: unknown): Promise<T> => {
+    void _url;
+    void _data;
     throw new ApiError(
       'Backend não configurado. Configure VITE_API_URL e implemente o cliente HTTP.',
       503
     );
   },
-  put: async <T>(url: string, data?: unknown): Promise<T> => {
+  put: async <T>(_url: string, _data?: unknown): Promise<T> => {
+    void _url;
+    void _data;
     throw new ApiError(
       'Backend não configurado. Configure VITE_API_URL e implemente o cliente HTTP.',
       503
     );
   },
-  delete: async (url: string): Promise<void> => {
+  delete: async (_url: string): Promise<void> => {
+    void _url;
     throw new ApiError(
       'Backend não configurado. Configure VITE_API_URL e implemente o cliente HTTP.',
       503

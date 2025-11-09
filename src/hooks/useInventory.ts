@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Product, Movement, ProductFormData } from '../types';
 import { ProductService } from '../services/products';
 import { MovementService } from '../services/movements';
